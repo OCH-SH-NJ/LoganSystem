@@ -15,6 +15,7 @@ import com.logan.SparkJob.PiJob;
 @Repository
 public class SparkWorkFlow {
 
+	
 	public Double testSparkWork() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
 		// TODO Auto-generated method stub
 		LivyClient client = new LivyClientBuilder().setURI(new URI("http://192.168.109.130:8998")).build();

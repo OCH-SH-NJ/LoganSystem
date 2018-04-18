@@ -42,5 +42,15 @@
 			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/Maven/LIB/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar" sourcepath="D:/Maven/LIB/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.archivename" value="scala-library-2.10.4.jar"/>
+			<attribute name="maven.groupId" value="org.scala-lang"/>
+			<attribute name="maven.artifactId" value="scala-library"/>
+			<attribute name="maven.version" value="2.10.4"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
