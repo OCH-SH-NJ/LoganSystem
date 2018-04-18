@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.logan.pojo.Bucket;
 import com.logan.pojo.DataPojo;
 import com.logan.pojo.HitsPojo;
+import com.logan.pojo.QueryPojo;
 import com.logan.pojo.ResponsePoJo;
 import com.logan.util.SparkWorkFlow;
 
@@ -20,6 +22,8 @@ public class WorkService implements IWorkService {
 	private SparkWorkFlow workFlow;
 	
 	public ResponsePoJo executeQuery(String queryString) {
+		QueryPojo pojo = (QueryPojo) JSON.parseObject(queryString,QueryPojo.class);
+		System.out.println(pojo.getRange());
 		return giveFakeResponse();
 	}
 	
