@@ -17,8 +17,8 @@
                   </thead>
                   <tbody data-bind="foreach: selectedFields">
                   <tr>
-                      <td><span data-bind="text: fieldName"></span></td>
-                      <td class='operation'>
+                      <td style="width: 70%"><span data-bind="text: fieldName"></span></td>
+                      <td class='operation' style="width: 30%">
                           <span><button data-bind="click: $parent.removeField, visible: showButton">Remove</button></span>
                       </td>
                   </tr>
@@ -30,14 +30,14 @@
               <table>
                   <thead>
                   <tr>
-                      <th style="width: 15%">Available Fields</th>
+                      <th>Available Fields</th>
                       <th></th>
                   </tr>
                   </thead>
                   <tbody data-bind="foreach: availableFields">
                   <tr>
-                      <td><span data-bind="text: fieldName"></span></td>
-                      <td class='operation'>
+                      <td style="width: 70%"><span data-bind="text: fieldName"></span></td>
+                      <td class='operation' style="width: 30%">
                           <span><button data-bind="click: $parent.addField">Add</button></span>
                       </td>
                   </tr>

@@ -18,6 +18,9 @@ table > tbody > tr > td{
    padding-right: 16px;
    /*border-bottom: 1px solid #ccc;*/
 }
+.operation{
+   width: 30px;
+}
 
 button {
    opacity: 1;
@@ -49,11 +52,13 @@ button:hover{
    height: 100%;
    flex: 0 0 auto;
    padding: 10px;
+   padding-top: 60px;
 }
 
 .log_analytics_canvas_stage {
    flex: 1 1 auto;
    padding: 10px;
+   padding-top: 0px;
    height: 100%;
    display: flex;
    flex-direction: column;

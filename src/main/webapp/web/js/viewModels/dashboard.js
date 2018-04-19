@@ -40,7 +40,7 @@ define(['ojs/ojcore', 'ojs/ojtable', 'ojs/ojchart', 'knockout', 'jquery', 'ojs/o
        */
       self.handleAttached = function(info) {
         // Implement if needed
-         this.gteValue = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date(2013, 0, 1))); // start time
+         this.gteValue = ko.observable(); // start time
          this.lteValue = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date())); // end time
 
          var aAvailableFields = [{
@@ -113,43 +113,58 @@ define(['ojs/ojcore', 'ojs/ojtable', 'ojs/ojchart', 'knockout', 'jquery', 'ojs/o
          this.groupsValue = ko.observableArray(timestampBuckets);
 
          this.tags = ko.observableArray([
-            { value: "status:200", label: "status:200" }
+            { value: "status:200", label: "status:200" },
+            { value: "hostIp:192.168.1.1", label: "hostIp:192.168.1.1" },
+            { value: "userName:bob", label: "userName:bob" },
+            { value: "reqInfo:GET", label: "reqInfo:GET" }
          ]);
 
          var onQuerySuccess = function(data) {
-            var jsonObject = JSON.parse();
+            var jsonObject = data;
             var logCountBuckets = [];
             var timestampBuckets = [];
             var buckets = jsonObject.buckets;
             for (var i = 0; i < buckets.length; i++) {
-               logCountBuckets.push(buckets[i].loc_count);
+               logCountBuckets.push(buckets[i].doc_count);
                timestampBuckets.push(buckets[i].timestamp);
             }
-            self.seriesValue[0].items = logCountBuckets;
-            self.groupsValue = timestampBuckets;
+            self.seriesValue.removeAll();
+            self.seriesValue.push({name: "Count", items: logCountBuckets, color: colorHandler.getValue("low")});
+            self.groupsValue.removeAll();
+            for (var i = 0; i < timestampBuckets.length; i++) {
+               self.groupsValue.push(timestampBuckets[i]);
+            }
 
             var hits = jsonObject.hits.data;
             self.datasource.reset(hits, {idAttribute: 'timestamp'});
+            self.selectedFields.removeAll();
+            for (var key in hits[0]) {
+               if (hits[0].hasOwnProperty(key) && key !== "timestamp") {
+                  self.selectedFields.push({fieldName: key, showButton: false});
+               }
+            }
          };
 
          var executeQuery = function(queryString) {
+
             var size = 500;
             var sort = {timestamp:{order:"desc"}};
-            var gte = new Date(self.gteValue()).getTime();
+
             var lte = new Date(self.lteValue()).getTime();
-            // if (!lte) {
-            //    lte = new Date().getTime();
-            // }
-            // if (!gte) {
-            //    gte = lte - 24 * 60 * 60 * 1000;
-            // }
+            var gte;
+            if (self.gteValue()) {
+               gte = new Date(self.gteValue()).getTime();
+            } else {
+               gte = lte - 24 * 60 * 60 * 1000;
+            }
+
             var range = {timestamp:{gte: gte, lte: lte, format: "epoch_millis"}};
             var date_histogram = {field: "timestamp", interval:"30m"};
             var dataLoad = {queryString: queryString, size: size, sort: sort, range: range, date_histogram: date_histogram};
 
             $.ajax({
                type: 'POST',
-               url: 'http://172.31.23.13:8080/LoganSystem/discover/executeQuery',
+               url: 'discover/executeQuery',
                data: JSON.stringify(dataLoad, null),
                success: onQuerySuccess,
                contentType: "application/json",
@@ -163,7 +178,13 @@ define(['ojs/ojcore', 'ojs/ojtable', 'ojs/ojchart', 'knockout', 'jquery', 'ojs/o
                   previousValue: ui.previousValue,
                   value: ui.value
                };
-               executeQuery(ui.value[0]);
+               var queryString;
+               if (ui.value.length > 0) {
+                  queryString = ui.value[0];
+               } else {
+                  queryString = "*";
+               }
+               executeQuery(queryString);
             }
          };
 
@@ -175,7 +196,9 @@ define(['ojs/ojcore', 'ojs/ojtable', 'ojs/ojchart', 'knockout', 'jquery', 'ojs/o
             };
             this.previousValue = ui.value;
             var queryString;
-            if (!ui.value) {
+            if (ui.value.length > 0) {
+               queryString = ui.value[0];
+            } else {
                queryString = "*";
             }
             executeQuery(queryString);
