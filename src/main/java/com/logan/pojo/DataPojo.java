@@ -1,50 +1,71 @@
 package com.logan.pojo;
 
 public class DataPojo {
-	private Long timeStamp;
+
 	private String hostIp;
-	private int status;
-	private String message;
-	private String _source;
-	
-	public DataPojo(Long timeStamp, String hostIp, int status, String message, String _source) {
+	private String userName;
+	private String timeStamp;
+	private String reqInfo;
+	private String agentInfo;
+	private String resource;
+
+	public DataPojo(String hostIp, String userName, String timeStamp, String reqInfo, String agentInfo,
+			String resource) {
 		super();
-		this.timeStamp = timeStamp;
 		this.hostIp = hostIp;
-		this.status = status;
-		this.message = message;
-		this._source = _source;
-	}
-	public Long getTimeStamp() {
-		return timeStamp;
-	}
-	public void setTimeStamp(Long timeStamp) {
+		this.userName = userName;
 		this.timeStamp = timeStamp;
+		this.reqInfo = reqInfo;
+		this.agentInfo = agentInfo;
+		this.resource = resource;
 	}
+
+	public String getResource() {
+		return resource;
+	}
+
+	public void setResource(String resource) {
+		this.resource = resource;
+	}
+
 	public String getHostIp() {
 		return hostIp;
 	}
+
 	public void setHostIp(String hostIp) {
 		this.hostIp = hostIp;
 	}
-	public int getStatus() {
-		return status;
+
+	public String getUserName() {
+		return userName;
 	}
-	public void setStatus(int status) {
-		this.status = status;
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getMessage() {
-		return message;
+
+	public String getTimeStamp() {
+		return timeStamp;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
 	}
-	public String get_source() {
-		return _source;
+
+	public String getReqInfo() {
+		return reqInfo;
 	}
-	public void set_source(String _source) {
-		this._source = _source;
+
+	public void setReqInfo(String reqInfo) {
+		this.reqInfo = reqInfo;
 	}
-	
-	
+
+	public String getAgentInfo() {
+		return agentInfo;
+	}
+
+	public void setAgentInfo(String agentInfo) {
+		this.agentInfo = agentInfo;
+	}
+
 }

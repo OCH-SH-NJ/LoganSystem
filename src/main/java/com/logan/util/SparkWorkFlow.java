@@ -10,11 +10,10 @@ import org.apache.livy.LivyClient;
 import org.apache.livy.LivyClientBuilder;
 import org.springframework.stereotype.Repository;
 
-import com.logan.SparkJob.PiJob;
+import com.logan.SparkJob.PreJob;
 
 @Repository
 public class SparkWorkFlow {
-
 	
 	public Double testSparkWork() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
 		// TODO Auto-generated method stub
@@ -24,7 +23,7 @@ public class SparkWorkFlow {
 			client.uploadJar(new File("D:/PI.jar")).get();
 
 			System.err.printf("Running PiJob with %d samples...\n", 3);
-			Double pi = client.submit(new PiJob(3)).get();
+			Double pi = client.submit(new PreJob()).get();
 
 			return pi;
 		} finally {

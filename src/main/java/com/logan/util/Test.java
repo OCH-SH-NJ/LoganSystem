@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 import org.apache.livy.LivyClient;
 import org.apache.livy.LivyClientBuilder;
 
-import com.logan.SparkJob.PiJob;
+import com.logan.SparkJob.PreJob;
 
 public class Test {
 	//Post Jar to Livy
@@ -21,7 +21,7 @@ public static void main(String[] args) throws IOException, URISyntaxException, I
 			  client.uploadJar(new File("D:/PI.jar")).get();
 
 			  System.err.printf("Running PiJob with %d samples...\n", 3);
-			  Double pi = client.submit(new PiJob(3)).get();
+			  Double pi = client.submit(new PreJob()).get();
 
 			  System.out.println("Pi is roughly: " + pi);
 			} finally {

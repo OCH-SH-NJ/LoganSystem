@@ -3,13 +3,14 @@ package com.logan.pojo;
 import java.util.List;
 
 public class HitsPojo {
-	private List<DataPojo> dataPojos;
+	private List<DataPojo> data;
 	private int total;
-	public List<DataPojo> getDataPojos() {
-		return dataPojos;
+
+	public List<DataPojo> getData() {
+		return data;
 	}
-	public void setDataPojos(List<DataPojo> dataPojos) {
-		this.dataPojos = dataPojos;
+	public void setData(List<DataPojo> data) {
+		this.data = data;
 	}
 	public int getTotal() {
 		return total;
@@ -19,7 +20,7 @@ public class HitsPojo {
 	}
 	public HitsPojo(List<DataPojo> dataPojos, int total) {
 		super();
-		this.dataPojos = dataPojos;
+		this.data = dataPojos;
 		this.total = total;
 	}
 	
