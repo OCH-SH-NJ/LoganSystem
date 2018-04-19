@@ -1,0 +1,81 @@
+/*
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+html {
+   height: 100%;
+}
+
+body {
+   min-height: 100%;
+}
+
+table > tbody > tr > td{
+   padding: 8px;
+   padding-right: 16px;
+   /*border-bottom: 1px solid #ccc;*/
+}
+
+button {
+   opacity: 1;
+   font-size: 12px;
+   padding: 5px 10px;
+   /*background: none;*/
+   margin: 0;
+   outline: none;
+   border: none;
+   margin-bottom: 5px;
+   border-radius: 4px;
+}
+button:hover{
+   background-color: #005472;
+   color: #fff;
+   cursor: pointer;
+}
+
+.log_analytics_discover_root {
+   display: flex;
+   flex-flow: row nowrap;
+   height: 100%;
+   width: 100%;
+   overflow: hidden;
+}
+
+.log_analytics_discover_sidebar {
+   width: 180px;
+   height: 100%;
+   flex: 0 0 auto;
+   padding: 10px;
+}
+
+.log_analytics_canvas_stage {
+   flex: 1 1 auto;
+   padding: 10px;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+.log_analytics_available_fields_table_container {
+   background-color: #cce4ed;
+}
+
+.log_analytics_selected_fields_table_container {
+
+}
+
+.log_analytics_canvas_stage_histogram {
+   padding: 10px 0px;
+}
+
+.log_analytics_canvas-stage_log_table_container {
+   padding: 10px 0px;
+}
+
+.log_analytics_canvas_stage_toolbar {
+   display: flex;
+   flex-flow: row-reverse nowrap;
+}

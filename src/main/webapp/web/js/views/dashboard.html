@@ -1,0 +1,118 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+  <div id="discover_root" class="log_analytics_discover_root">
+
+      <div id="discover_sidebar" class="log_analytics_discover_sidebar">
+
+          <div  id="selected_fields" class="log_analytics_selected_fields_table_container">
+              <table>
+                  <thead>
+                  <tr>
+                      <th>Selected Fields</th>
+                      <th></th>
+                  </tr>
+                  </thead>
+                  <tbody data-bind="foreach: selectedFields">
+                  <tr>
+                      <td><span data-bind="text: fieldName"></span></td>
+                      <td class='operation'>
+                          <span><button data-bind="click: $parent.removeField, visible: showButton">Remove</button></span>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+
+          <div id="available_fields" class="log_analytics_available_fields_table_container">
+              <table>
+                  <thead>
+                  <tr>
+                      <th style="width: 15%">Available Fields</th>
+                      <th></th>
+                  </tr>
+                  </thead>
+                  <tbody data-bind="foreach: availableFields">
+                  <tr>
+                      <td><span data-bind="text: fieldName"></span></td>
+                      <td class='operation'>
+                          <span><button data-bind="click: $parent.addField">Add</button></span>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+
+      </div>
+
+      <div id="discover_canvas_stage" class="log_analytics_canvas_stage">
+
+          <div id="discover_canvas_stage_toolbar" class="log_analytics_canvas_stage_toolbar">
+              <div class="log_analytics_canvas_stage_time_picker">
+                  <label for="discover_canvas_stage_time_picker_to">To</label>
+                  <input id="discover_canvas_stage_time_picker_to" data-bind="ojComponent: {component: 'ojInputDateTime',
+                                                value: lteValue}"/>
+              </div>
+              <div class="log_analytics_canvas_stage_time_picker">
+                  <label for="discover_canvas_stage_time_picker_from">From</label>
+                  <input id="discover_canvas_stage_time_picker_from" data-bind="ojComponent: {component: 'ojInputDateTime',
+                                                value: gteValue}"/>
+              </div>
+              <div id="discover_canvas_stage_toolbar_placeholder"></div>
+          </div>
+
+          <div id=""discover_canvas_stage_searchbar class="log_analytics_canvas_stage_histogram">
+              <input id="inputSearch"
+                     data-bind="ojComponent: {
+                    component: 'ojInputSearch',
+                    options: tags,
+                    optionChange: valueChangeHandler,
+                    update: updateEventHandler,
+                    rootAttributes: {style:'max-width:100%'}}"/>
+          </div>
+
+          <div id="discover_canvas_stage_histogram" class="log_analytics_canvas_stage_histogram">
+              <div id="barChart" data-bind="ojComponent: {
+                   component: 'ojChart',
+                   type: 'bar',
+                   title: {text: 'Doc Count Histogram'},
+                   series: seriesValue,
+                   groups: groupsValue,
+                   legend: {rendered: 'off'},
+                   styleDefaults: {barGapRatio: 0},
+                   yAxis: {title: 'Count'},
+                   timeAxisType: 'enabled',
+                   animationOnDisplay: 'auto',
+                   animationOnDataChange: 'auto'}, visible: false"
+                               style="width:100%;max-width: 1000px;height:300px;">
+                          </div>
+                          <div id="lineChart" data-bind="ojComponent: {
+                   component: 'ojChart',
+                   type: 'line',
+                   title: {text: 'Daily Access Count'},
+                   series: seriesValue,
+                   groups: groupsValue,
+                   legend: {rendered: 'off'},
+                   yAxis: {title: 'Count'},
+                   timeAxisType: 'enabled',
+                   animationOnDisplay: 'auto',
+                   animationOnDataChange: 'auto'}"
+                               style="width:100%;max-width: 1000px;height:300px;">
+              </div>
+          </div>
+
+          <div id="discover_canvas_stage_log_table_container" class="log_analytics_canvas-stage_log_table_container">
+              <table id="discover_canvas_stage_log_table" summary="Log Table" aria-label="Log Table"
+                     data-bind="ojComponent: {component: 'ojTable',
+                                data: datasource,
+                                columnsDefault: {sortable: 'none'},
+                                columns: logDataTableHeader
+                               }">
+              </table>
+          </div>
+
+      </div>
+  </div>
+</div>
